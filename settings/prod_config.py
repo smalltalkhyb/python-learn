@@ -2,7 +2,8 @@ import os
 from functools import lru_cache
 from typing import List
 
-from pydantic import AnyHttpUrl, BaseSettings
+from pydantic import AnyHttpUrl
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -12,7 +13,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1/coderepo"
     API_V2_STR: str = "/api/v2/coderepo"
     APP_NAME: str = "sthg_code_repository"
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # 日志目录
     LOG_PATH: str = os.path.join(BASE_DIR, "logs")
     # 静态文件目录
@@ -23,17 +24,17 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ['http://localhost']
 
     # --------------- 数据库配置 ---------
-    DB_DRIVE = os.getenv('DB_DRIVE', 'mysql+pymysql')
-    DB_HOST = os.environ.get('DB_HOST', "192.168.1.171")
-    DB_PORT = int(os.environ.get('DB_PORT', "9030"))
-    DB_USER = os.environ.get('DB_USER', "dev_user")
-    DB_PWD = os.environ.get('DB_PWD', "Dev@02891")
-    DB_SCHEAMA = os.environ.get('DB_SCHEAMA', "")
+    DB_DRIVE: str = os.getenv('DB_DRIVE', 'mysql+pymysql')
+    DB_HOST: str = os.environ.get('DB_HOST', "192.168.1.171")
+    DB_PORT: int = int(os.environ.get('DB_PORT', "9030"))
+    DB_USER: str = os.environ.get('DB_USER', "dev_user")
+    DB_PWD: str = os.environ.get('DB_PWD', "Dev@02891")
+    DB_SCHEAMA: str = os.environ.get('DB_SCHEAMA', "")
     # --------------- 数据库配置 ------------------
-    DB_DATABASE = os.environ.get('DB_DATABASE', "ontology_test_db")
+    DB_DATABASE: str = os.environ.get('DB_DATABASE', "ontology_test_db")
 
     # --------------- 数据集配置 ------------------
-    DB_DATASET_DATABASE = os.environ.get('DB_DATASET_DATABASE', "ontology_data_source_test")
+    DB_DATASET_DATABASE: str = os.environ.get('DB_DATASET_DATABASE', "ontology_data_source_test")
 
     # --------------- 数据集配置 ------------------
 
@@ -47,12 +48,11 @@ class Settings(BaseSettings):
     GITLAB_PUBLIC_FORK_PROJECT_ID: int = os.getenv('GITLAB_PUBLIC_FORK_PROJECT_ID', 424)
     GITLAB_LUBN_USER_ID: int = os.getenv('GITLAB_LUBN_USER_ID', 3)
     GITLAB_PUBLIC_GROUP_TOKEN: str = os.getenv('GITLAB_PUBLIC_GROUP_TOKEN', "pfvPqxZgTHoWR7sda1zX")
-    GITLAB_PUBLIC_GIT_PROJECT_ID: str = os.getenv('GITLAB_PUBLIC_GIT_PROJECT_ID', 744)
+    GITLAB_PUBLIC_GIT_PROJECT_ID: int = os.getenv('GITLAB_PUBLIC_GIT_PROJECT_ID', 744)
     # ----------------- 不同服务之间的互相调用 ----------------
     ONTOLOGY_MANAGER_URL: str = os.getenv("ONTOLOGY_MANAGER_URL", "http://192.168.1.128:31176")
     GIT_PROJECT_PARENT_PATH: str = os.getenv('GIT_PROJECT_PARENT_PATH', "/tiangong")
-    GIT_PROJECT_APP_PATH: str =  os.getenv('GIT_PROJECT_APP_PATH', "app.py")
-
+    GIT_PROJECT_APP_PATH: str = os.getenv('GIT_PROJECT_APP_PATH', "app.py")
 
     # redis配置
     REDIS_HOST: str = os.environ.get('REDIS_HOST', '192.168.1.241')
@@ -60,9 +60,11 @@ class Settings(BaseSettings):
     REDIS_PASSWORD: str = os.environ.get('REDIS_PASSWORD', '123456')
     REDIS_DEFAULT_DB: int = int(os.environ.get('REDIS_DEFAULT_DB', 6))
 
-
     # 用户中心配置
-    TOKEN_USER_ID_URL = os.getenv("TOKEN_USER_ID_URL", "http://192.168.1.124:31018/api/user/userInfoByToken")
+    TOKEN_USER_ID_URL: str = os.getenv("TOKEN_USER_ID_URL", "http://192.168.1.124:31018/api/user/userInfoByToken")
+
+    WORKFLOW_PARALLEL_DEPTH_LIMIT: int = 3
+
 
 @lru_cache()
 def get_prod_settings():

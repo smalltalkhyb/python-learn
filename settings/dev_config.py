@@ -2,7 +2,9 @@ import os
 from functools import lru_cache
 from typing import List
 
-from pydantic import BaseSettings, AnyHttpUrl
+
+from pydantic import AnyHttpUrl
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -12,7 +14,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1/coderepo"
     API_V2_STR: str = "/api/v2/coderepo"
     APP_NAME: str = "sthg_code_repository"
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    BASE_DIR:str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # 日志目录
     LOG_PATH: str = os.path.join(BASE_DIR, "logs")
     # 静态文件目录
@@ -22,7 +24,7 @@ class Settings(BaseSettings):
     # 跨域设置 验证 list包含任意http url
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ['http://localhost']
     # --------------- 数据库配置 ------------------
-    SQLALCHEMY_DATABASE_URL = os.getenv('SQLALCHEMY_DATABASE_URL',
+    SQLALCHEMY_DATABASE_URL:str = os.getenv('SQLALCHEMY_DATABASE_URL',
                                         'mysql+pymysql://dev_user:Dev@02891@192.168.1.171:9030/ontology_test_db')
 
     # ----------------- Gitlab 配置 ----------------
@@ -49,7 +51,11 @@ class Settings(BaseSettings):
 
 
     # 用户中心配置
-    TOKEN_USER_ID_URL = os.getenv("TOKEN_USER_ID_URL", "http://192.168.1.124:31018/api/user/userInfoByToken")
+    TOKEN_USER_ID_URL:str = os.getenv("TOKEN_USER_ID_URL", "http://192.168.1.124:31018/api/user/userInfoByToken")
+
+
+    WORKFLOW_PARALLEL_DEPTH_LIMIT:int=3
+
 
 @lru_cache()
 def get_dev_settings():
