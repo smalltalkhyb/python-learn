@@ -17,3 +17,6 @@ requests==2.32.3
 redis==5.2.1
 starlette==0.46.2
 uvicorn==0.34.2
+apache-flink==2.0.0
+faker==37.1.0
+pandas==2.2.3
