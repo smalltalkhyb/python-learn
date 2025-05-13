@@ -1,13 +1,7 @@
-"""
-@Author: huyanbing
-@Date: 2025/5/12
-@Description: 
-"""
-from typing import Literal, Sequence
+from collections.abc import Sequence
+from typing import Literal
 
 from pydantic import BaseModel, Field
-
-from apps.service.grap.default_type_value import BaseNodeData
 
 SupportedComparisonOperator = Literal[
     # for string or array
@@ -48,16 +42,8 @@ class SubVariableCondition(BaseModel):
     conditions: list[SubCondition] = Field(default=list)
 
 
-
-class VariableSelector(BaseModel):
-    """
-    Variable Selector.
-    """
-
-    variable: str
-    value_selector: Sequence[str]
-
-
-
-
-
+class Condition(BaseModel):
+    variable_selector: list[str]
+    comparison_operator: SupportedComparisonOperator
+    value: str | Sequence[str] | None = None
+    sub_variable_condition: SubVariableCondition | None = None

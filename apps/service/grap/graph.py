@@ -11,8 +11,8 @@ from pydantic import BaseModel, Field
 
 import settings
 from apps.service.grap.end_stream_generator_router import EndStreamGeneratorRouter
-from apps.service.grap.graph_entities import EndStreamParam
 from apps.service.grap.node_type import NodeType
+from apps.service.grap.nodes.end import EndStreamParam
 from apps.service.grap.run_condition import RunCondition
 
 

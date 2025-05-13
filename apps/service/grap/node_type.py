@@ -30,3 +30,18 @@ class NodeType(Enum):
     DOCUMENT_EXTRACTOR = "document-extractor"
     LIST_OPERATOR = "list-operator"
     AGENT = "agent"
+
+
+
+class ErrorStrategy(Enum):
+    FAIL_BRANCH = "fail-branch"
+    DEFAULT_VALUE = "default-value"
+
+
+class FailBranchSourceHandle(Enum):
+    FAILED = "fail-branch"
+    SUCCESS = "success-branch"
+
+
+CONTINUE_ON_ERROR_NODE_TYPE = [NodeType.LLM, NodeType.CODE, NodeType.TOOL, NodeType.HTTP_REQUEST]
+RETRY_ON_ERROR_NODE_TYPE = CONTINUE_ON_ERROR_NODE_TYPE

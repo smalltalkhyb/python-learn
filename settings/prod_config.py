@@ -65,6 +65,40 @@ class Settings(BaseSettings):
 
     WORKFLOW_PARALLEL_DEPTH_LIMIT: int = 3
 
+    MAX_SUBMIT_COUNT: int = 100
+
+    # Files URL
+    FILES_URL: str = "http://127.0.0.1:5001"
+    SECRET_KEY: str = "ner3WutzWjjNVJ6/TKQDc8rMVx/7Q8/Av96unQ+UbchE/grBvzBwjE+6"
+
+    # The time in seconds after the signature is rejected
+    FILES_ACCESS_TIMEOUT: int = 300
+
+    SSRF_PROXY_HTTP_URL: str = ""
+    SSRF_PROXY_HTTPS_URL: str = ""
+    SSRF_DEFAULT_MAX_RETRIES: int = 3
+    SSRF_DEFAULT_TIME_OUT: int = 5
+    SSRF_DEFAULT_CONNECT_TIME_OUT: int = 5
+    SSRF_DEFAULT_READ_TIME_OUT: int = 5
+    SSRF_DEFAULT_WRITE_TIME_OUT: int = 5
+
+    BATCH_UPLOAD_LIMIT: int = 10
+    KEYWORD_DATA_SOURCE_TYPE: str = "database"
+
+    # Workflow file upload limit
+    WORKFLOW_FILE_UPLOAD_LIMIT: int = 10
+
+    # HTTP Node configuration
+    HTTP_REQUEST_MAX_CONNECT_TIMEOUT: int = 300
+    HTTP_REQUEST_MAX_READ_TIMEOUT: int = 600
+    HTTP_REQUEST_MAX_WRITE_TIMEOUT: int = 600
+    HTTP_REQUEST_NODE_MAX_BINARY_SIZE: int = 10485760
+    HTTP_REQUEST_NODE_MAX_TEXT_SIZE: int = 1048576
+    HTTP_REQUEST_NODE_SSL_VERIFY: bool = True
+
+    # Respect X-* headers to redirect clients
+    RESPECT_XFORWARD_HEADERS_ENABLED: str = "false"
+
 
 @lru_cache()
 def get_prod_settings():

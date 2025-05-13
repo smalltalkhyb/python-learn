@@ -55,6 +55,14 @@ class Settings(BaseSettings):
 
 
     WORKFLOW_PARALLEL_DEPTH_LIMIT:int=3
+    MAX_SUBMIT_COUNT:int =100
+
+
+    # Files URL
+    FILES_URL:str="http://127.0.0.1:5001"
+    SECRET_KEY: str = "ner3WutzWjjNVJ6/TKQDc8rMVx/7Q8/Av96unQ+UbchE/grBvzBwjE+6"
+    # The time in seconds after the signature is rejected
+    FILES_ACCESS_TIMEOUT: str = 300
 
 
 @lru_cache()
